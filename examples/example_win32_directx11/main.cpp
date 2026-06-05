@@ -106,7 +106,6 @@ int main(int, char**)
 
     // Our state
     bool show_demo_window = false;
-    bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // Main loop
@@ -150,11 +149,11 @@ int main(int, char**)
 
         ImGui::Begin("A new winodw ");
         static int counter{ 0 };
-
-         if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-                counter++;
-            ImGui::SameLine();
+            
             ImGui::Text("counter = %d", counter);
+            if (ImGui::Button("Increase counter")) { counter++; }                           // Buttons return true when clicked (most widgets return true when edited/activated)
+            if (ImGui::Button("Decrease counter")) { counter--; }
+            if (ImGui::Button("Reset counter")) { counter = 0;}
 
         ImGui::End();
 
@@ -165,7 +164,7 @@ int main(int, char**)
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
-            float f = 0.0f;
+            static float f = 0.0f;
             
             ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
 
